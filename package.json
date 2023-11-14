@@ -4,6 +4,7 @@
   "description": "API for SMSGFX.",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "jest"
   },
   "author": "Nicholas Furgiuele",
