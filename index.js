@@ -22,9 +22,8 @@ app.get('/palette', (request, response) => {
     }]);
 });
 
-// app.post('/palette', (request, response) => {
-//     request.body.
-// });
+app.post('/palette', (request, response) => {
+});
 
 app.listen(PORT_HTTP, () => {
     console.log(`Server running on port ${PORT_HTTP}`);
