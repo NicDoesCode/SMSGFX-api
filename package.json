@@ -1,0 +1,15 @@
+{
+  "name": "smsgfx-api",
+  "version": "1.0.0",
+  "description": "API for SMSGFX.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "author": "Nicholas Furgiuele",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "type": "module"
+}
