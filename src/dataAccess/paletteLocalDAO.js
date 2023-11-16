@@ -71,7 +71,6 @@ class PaletteLocalDAO extends PaletteDAO {
         return true;
     }
 
-
     /**
      * Deletes a palette by ID, returns true if deleted, otherwise false.
      * @param {string} paletteId - Unique ID of the palette to delete.
@@ -99,28 +98,28 @@ module.exports = PaletteLocalDAO;
 
 /** @type {import('../models/palette').Palette[]} */
 const palettes = [
-    {
-        paletteId: 0,
-        title: 'PaletteSMS',
-        system: 'sms',
-        colours: [
-            { r: 255, g: 255, b: 255 },
-            { r: 255, g: 0, b: 0 },
-            { r: 0, g: 255, b: 0 },
-            { r: 0, g: 0, b: 255 },
-            { r: 0, g: 0, b: 0 }
-        ]
-    },
-    {
-        paletteId: 1,
-        title: 'PaletteGG',
-        system: 'gg',
-        colours: [
-            { r: 255, g: 255, b: 255 },
-            { r: 255, g: 0, b: 0 },
-            { r: 0, g: 255, b: 0 },
-            { r: 0, g: 0, b: 255 },
-            { r: 0, g: 0, b: 0 }
-        ]
-    }
+    // {
+    //     paletteId: 0,
+    //     title: 'PaletteSMS',
+    //     system: 'sms',
+    //     colours: [
+    //         { r: 255, g: 255, b: 255 },
+    //         { r: 255, g: 0, b: 0 },
+    //         { r: 0, g: 255, b: 0 },
+    //         { r: 0, g: 0, b: 255 },
+    //         { r: 0, g: 0, b: 0 }
+    //     ]
+    // },
+    // {
+    //     paletteId: 1,
+    //     title: 'PaletteGG',
+    //     system: 'gg',
+    //     colours: [
+    //         { r: 255, g: 255, b: 255 },
+    //         { r: 255, g: 0, b: 0 },
+    //         { r: 0, g: 255, b: 0 },
+    //         { r: 0, g: 0, b: 255 },
+    //         { r: 0, g: 0, b: 0 }
+    //     ]
+    // }
 ];

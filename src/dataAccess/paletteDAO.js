@@ -38,7 +38,6 @@ class PaletteDAO {
         throw new Error('Not implemented.');
     }
 
-
     /**
      * Deletes a palette by ID, returns true if deleted, otherwise false.
      * @param {string} paletteId - Unique ID of the palette to delete.
