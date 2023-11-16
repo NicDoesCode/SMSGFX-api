@@ -7,8 +7,8 @@ const path = require('path');
 require('dotenv').config();
 
 
-const PORT_HTTP = process.env.SERVER_HTTP_PORT;
-const PORT_HTTPS = process.env.SERVER_HTTPS_PORT;
+const PORT_HTTP = process.env.SERVER_HTTP_PORT || 8080;
+const PORT_HTTPS = process.env.SERVER_HTTPS_PORT || 8440;
 
 
 // require('./src/canvas').makeImage();

@@ -3,6 +3,7 @@ const express = require('express');
 const PaletteRepo = require('./../respository/paletteRepo');
 // const PaletteDAO = require('./../dataAccess/paletteLocalDAO');
 const PaletteDAO = require('./../dataAccess/paletteMongoDAO');
+const MongoHelper = require('./../helpers/mongoHelper');
 
 
 /**
@@ -11,7 +12,9 @@ const PaletteDAO = require('./../dataAccess/paletteMongoDAO');
 const configure = (app) => {
 
 
-    const repo = new PaletteRepo(new PaletteDAO('mongodb://localhost:27017'));
+    const connectionString = MongoHelper.getConnectionString();
+    const database = process.env.MONGO_DATABASE;
+    const repo = new PaletteRepo(new PaletteDAO(connectionString, database));
 
 
     // List palettes 

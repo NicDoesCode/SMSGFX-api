@@ -11,12 +11,13 @@ class paletteMongoDAO extends PaletteDAO {
     #database;
     /** @type {Collection<Document>} */
     #palettes;
+    #firstConnection = true;
 
 
-    constructor(connectionString) {
+    constructor(connectionString, database) {
         super();
         this.#client = new MongoClient(connectionString);
-        this.#database = this.#client.db('smsgfx-api');
+        this.#database = this.#client.db(database);
         this.#palettes = this.#database.collection('palettes');
     }
 
@@ -112,6 +113,9 @@ class paletteMongoDAO extends PaletteDAO {
 
     async #checkConnection() {
         await this.#client.connect();
+        if (this.#firstConnection) {
+            this.#firstConnection = false;
+        }
     };
 
 

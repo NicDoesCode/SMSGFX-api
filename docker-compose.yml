@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  nodejs: 
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: nodejs
+    container_name: nodejs
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - SERVER_HTTP_PORT=$SERVER_HTTP_PORT
+      - SERVER_HTTPS_PORT=$SERVER_HTTPS_PORT
+      - SERVER_HTTPS_ENABLE=$SERVER_HTTPS_ENABLE
+      - MONGO_SERVER_ADDRESS=$MONGO_SERVER_ADDRESS
+      - MONGO_SERVER_PORT=$MONGO_SERVER_PORT
+      - MONGO_SERVER_USERNAME=$MONGO_SERVER_USERNAME
+      - MONGO_SERVER_PASSWORD=$MONGO_SERVER_PASSWORD
+    ports:
+      - "80:8080"
+      - "443:8443"
+    # volumes:
+      # - .:/home/node/app
+      # - node_modules:/home/node/app/node_modules
+    networks: 
+      - app-network
+    command: sh launch.sh
+
+  db:
+    image: mongo:7.0
+    container_name: db
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_SERVER_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_SERVER_PASSWORD
+    volumes: 
+      - dbdata:/data/db
+    networks: 
+      - app-network
+    ports:
+      - "27017:27017"
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes: 
+  dbdata:
