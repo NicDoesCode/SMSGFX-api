@@ -1,20 +1,18 @@
 const express = require('express');
+const path = require('path');
 
+const PaletteDAO = require('./../dataAccess/paletteDAO');
 const PaletteRepo = require('./../respository/paletteRepo');
-// const PaletteDAO = require('./../dataAccess/paletteLocalDAO');
-const PaletteDAO = require('./../dataAccess/paletteMongoDAO');
-const MongoHelper = require('./../helpers/mongoHelper');
 
 
 /**
  * @param {express} app - Express application.
+ * @param {PaletteDAO} dao - Data access object.
  */
-const configure = (app) => {
+const configure = (app, dao) => {
 
 
-    const connectionString = MongoHelper.getConnectionString();
-    const database = process.env.MONGO_DATABASE;
-    const repo = new PaletteRepo(new PaletteDAO(connectionString, database));
+    const repo = new PaletteRepo(dao);
 
 
     // List palettes 

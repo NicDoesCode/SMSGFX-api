@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smsgfx-api
+spec:
+  selector:
+    matchLabels:
+      app: smsgfx-api
+  template:
+    metadata:
+      labels:
+        app: smsgfx-api
+    spec:
+      containers:
+      - name: smsgfx-api
+        image: node:alpine
+        copy: . . 
+        
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: <Port>

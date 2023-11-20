@@ -1,9 +1,18 @@
 const PaletteDAO = require('./paletteDAO');
 
+
 /**
  * Local, memory resident, non persistent palette data access object.
  */
 class PaletteLocalDAO extends PaletteDAO {
+
+
+    /**
+     * Initialises a new instance of the class.
+     */
+    constructor() {
+        console.debug('Local palette data access object initalised.');
+    }
 
 
     /**

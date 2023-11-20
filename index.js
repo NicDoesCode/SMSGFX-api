@@ -2,7 +2,7 @@ const express = require('express');
 const https = require('https');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const path = require('path');
+
 
 require('dotenv').config();
 
@@ -14,11 +14,14 @@ const PORT_HTTPS = process.env.SERVER_HTTPS_PORT || 8440;
 // require('./src/canvas').makeImage();
 
 
+const dao = require('./src/helpers/dataAccessHelper').getDataAccessObject();
+
+
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-require('./src/router/paletteRouter').configure(app);
+require('./src/router/paletteRouter').configure(app, dao);
 
 app.listen(PORT_HTTP, () => {
     console.log(`HTTP server running on port ${PORT_HTTP} (https://localhost:${PORT_HTTP})`);

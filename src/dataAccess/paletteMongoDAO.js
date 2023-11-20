@@ -14,11 +14,17 @@ class paletteMongoDAO extends PaletteDAO {
     #firstConnection = true;
 
 
+    /**
+     * Initialises a new instance of the class.
+     * @param {string} connectionString - Connection string for the Mongo server.
+     * @param {string} database - Database name.
+     */
     constructor(connectionString, database) {
         super();
         this.#client = new MongoClient(connectionString);
         this.#database = this.#client.db(database);
         this.#palettes = this.#database.collection('palettes');
+        console.debug('Mongo palette data access object initalised.');
     }
 
 
