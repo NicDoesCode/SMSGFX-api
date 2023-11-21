@@ -16,6 +16,9 @@ class PaletteRepository {
      * @param {PaletteDAO} paletteDAO - Palette data access object.
      */
     constructor(paletteDAO) {
+        if (paletteDAO === null || paletteDAO === undefined || paletteDAO instanceof PaletteDAO === false) {
+            throw new Error('Invalid palette data access object.');
+        }
         this.#dao = paletteDAO;
     }
 
@@ -27,6 +30,7 @@ class PaletteRepository {
      */
     async existsById(paletteId) {
         const result = await this.#dao.singleById(paletteId);
+        console.log(`result was`, result);
         return result !== null;
     }
 

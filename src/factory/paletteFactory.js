@@ -18,9 +18,13 @@ class PaletteFactory {
     /**
      * Deep clones a palette object.
      * @param {import("../models/palette").Palette} paletteToClone - Initial values to populate.
+     * @throws When the palette to clone is not supplied or is invalid.
      * @returns {import("../models/palette").Palette}
      */
     static clone(paletteToClone) {
+        if (paletteToClone === undefined || paletteToClone === null || !paletteToClone instanceof Object) {
+            throw new Error('Invalid palette to clone.');
+        }
         return {
             paletteId: paletteToClone?.paletteId ?? null, 
             system: paletteToClone?.system ?? null,
