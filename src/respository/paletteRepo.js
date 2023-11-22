@@ -30,7 +30,7 @@ class PaletteRepository {
      */
     async existsById(paletteId) {
         const result = await this.#dao.singleById(paletteId);
-        console.log(`result was`, result);
+        // console.log(`result was`, result);
         return result !== null;
     }
 

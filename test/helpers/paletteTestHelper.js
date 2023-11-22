@@ -1,4 +1,4 @@
-const { generateRandomString } = require('./../helpers/generalUtility');
+const { generateRandomString } = require('../../src/helpers/generalHelper');
 
 /**
  * Creates a palette object will null and empty values.

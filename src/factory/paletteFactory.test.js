@@ -1,5 +1,5 @@
 const PaletteFactory = require('./paletteFactory');
-const { createBlankPalette, createFilledPalette } = require('./../test/testPaletteUtility');
+const { createBlankPalette, createFilledPalette } = require('../../test/helpers/paletteTestHelper');
 
 test('create palette returns a result with no argument', () => {
     const expected = createBlankPalette();

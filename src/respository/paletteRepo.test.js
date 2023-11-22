@@ -1,48 +1,24 @@
-const { createRandomisedFilledPalette } = require('./../test/testPaletteUtility');
 const PaletteRepository = require('./paletteRepo');
 const PaletteDAO = require('./../dataAccess/paletteDAO');
-
-
-const PALETTE_ID_THAT_DOES_EXIST = 'DOES_EXIST';
-const PALETTE_ID_THAT_DOESNT_EXIST = 'DOES_NOT_EXIST';
-
-const MOCK_PALETTE_LIST = [
-    createRandomisedFilledPalette(),
-    createRandomisedFilledPalette(),
-    createRandomisedFilledPalette(),
-    createRandomisedFilledPalette(),
-    createRandomisedFilledPalette(),
-    createRandomisedFilledPalette(),
-    createRandomisedFilledPalette(),
-    createRandomisedFilledPalette(),
-    createRandomisedFilledPalette(),
-    createRandomisedFilledPalette()
-];
+const { mockReadAll, mockSingleById } = PaletteDAO;
+const { ID_THAT_DOES_EXIST, ID_THAT_DOES_NOT_EXIST, MOCK_PALETTE_LIST } = require('./../../test/consts');
 
 
 // Mock setup
 
 jest.mock('./../dataAccess/paletteDAO');
-
-const daoReadAllMock = jest.spyOn(PaletteDAO.prototype, 'readAll')
-    .mockImplementation(async () => MOCK_PALETTE_LIST);
-
-const singleByIdMock = jest.spyOn(PaletteDAO.prototype, 'singleById')
-    .mockImplementation(async (paletteId) => {
-        if (paletteId === PALETTE_ID_THAT_DOES_EXIST) {
-            return createRandomisedFilledPalette();
-        } else {
-            return null;
-        }
-    });
+// const daoReadAllMock = jest.spyOn(PaletteDAO.prototype, 'readAll');
+// const singleByIdMock = jest.spyOn(PaletteDAO.prototype, 'singleById');
 
 
 // Test lifecycle 
 
 beforeEach(() => {
     PaletteDAO.mockClear();
-    daoReadAllMock.mockClear();
-    singleByIdMock.mockClear();
+    // daoReadAllMock.mockClear();
+    // singleByIdMock.mockClear();
+    mockReadAll.mockClear();
+    mockSingleById.mockClear();
 });
 
 
@@ -82,13 +58,14 @@ test(`palette repository, exists by id, expect that DAO single by ID to be calle
     const dao = new PaletteDAO();
     const repo = new PaletteRepository(dao);
 
-    const result = await repo.existsById(PALETTE_ID_THAT_DOES_EXIST);
+    const result = await repo.existsById(ID_THAT_DOES_EXIST);
 
-    expect(singleByIdMock).toHaveBeenCalledTimes(1);
+    // expect(singleByIdMock).toHaveBeenCalledTimes(1);
+    expect(mockSingleById).toHaveBeenCalledTimes(1);
 });
 
 test(`palette repository, exists by id, expect that DAO single by ID to be passed the correct argument`, async () => {
-    const args = [PALETTE_ID_THAT_DOES_EXIST, PALETTE_ID_THAT_DOESNT_EXIST];
+    const args = [ID_THAT_DOES_EXIST, ID_THAT_DOES_NOT_EXIST];
 
     expect.assertions(args.length);
 
@@ -96,9 +73,11 @@ test(`palette repository, exists by id, expect that DAO single by ID to be passe
     const repo = new PaletteRepository(dao);
 
     for (const arg of args) {
-        singleByIdMock.mockReset();
+        mockSingleById.mockReset();
+        // singleByIdMock.mockReset();
         const result = await repo.existsById(arg);
-        let passedArgument = singleByIdMock.calls[0][0];
+        let passedArgument = mockSingleById.calls[0][0];
+        // let passedArgument = singleByIdMock.calls[0][0];
 
         expect(passedArgument).toEqual(arg);
     }
@@ -110,7 +89,7 @@ test(`palette repository, exists by id, expect true when palette ID exists`, asy
     const dao = new PaletteDAO();
     const repo = new PaletteRepository(dao);
 
-    const result = await repo.existsById(PALETTE_ID_THAT_DOES_EXIST);
+    const result = await repo.existsById(ID_THAT_DOES_EXIST);
 
     expect(result).toEqual(true);
 });
@@ -121,7 +100,7 @@ test(`palette repository, exists by id, expect false when palette ID doesn't exi
     const dao = new PaletteDAO();
     const repo = new PaletteRepository(dao);
 
-    const result = await repo.existsById(PALETTE_ID_THAT_DOESNT_EXIST);
+    const result = await repo.existsById(ID_THAT_DOES_NOT_EXIST);
 
     expect(result).toEqual(false);
 });
@@ -162,7 +141,8 @@ test(`palette repository, read all, calls the DAO read all function?`, async () 
 
     await repo.readAll();
 
-    expect(daoReadAllMock).toHaveBeenCalled();
+    // expect(daoReadAllMock).toHaveBeenCalled();
+    expect(mockReadAll).toHaveBeenCalled();
 });
 
 test(`palette repository, read all, received expected result`, async () => {
